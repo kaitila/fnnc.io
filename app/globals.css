@@ -1,0 +1,112 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* :root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
+  }
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: linear-gradient(
+      to bottom,
+      transparent,
+      rgb(var(--background-end-rgb))
+    )
+    rgb(var(--background-start-rgb));
+} */
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+.discrete {
+  transition-behavior: allow-discrete;
+}
+
+.transition-to-error {
+  transition: height 300ms ease-out, opacity 100ms 200ms;
+}
+
+.transition-from-error {
+  transition: height 300ms ease-out, opacity 100ms;
+}
+
+.card-animation {
+	transform: translateX(-50px);
+	opacity: 0;
+	animation: card linear forwards;
+	animation-timeline: view();
+	animation-range-start: 100px;
+	animation-range-end: 300px;
+}
+
+@keyframes appear {
+	to { transform: translate(0, 0); opacity: 1; }
+}
+
+@keyframes scrolling {
+  to { scale: 1 1; }
+}
+
+.scrolling-animation {
+  scale: 1 0;
+  animation: scrolling linear forwards;
+  animation-timeline: view();
+  animation-range-start: 100px;
+  animation-range-end: 200px;
+  transform-origin: top;
+}
+
+.appear-left, .appear-right, .appear-bottom, .appear-top {
+  opacity: 0;
+  animation: appear ease-out forwards;
+  animation-timeline: view();
+	animation-range-start: 100px;
+	animation-range-end: 300px;
+}
+
+.appear-left {
+  transform: translateX(-30px);
+}
+
+.appear-right {
+  transform: translateX(30px);
+}
+
+.appear-bottom {
+  transform: translateY(30px);
+  animation-range-start: 50px;
+	animation-range-end: 200px;
+}
+
+.appear-top {
+  transform: translateY(-30px);
+  animation-range-start: 100px;
+	animation-range-end: 250px;
+}
+
+@keyframes grow {
+  to { width: 100%; opacity: 1; }
+}
+
+.grow {
+  width: 50%; 
+  opacity: 0;
+  animation: grow ease-out forwards;
+  animation-timeline: view();
+	animation-range-start: 100px;
+	animation-range-end: 200px;
+}
