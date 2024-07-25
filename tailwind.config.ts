@@ -31,9 +31,12 @@ const config: Config = {
         active: '#075985',
         text: '#292524', /* 1. #334155 2. #1f2937 */
         light: '#64748b',
+        lighter: '#cbd5e1',
         bg: '#f8fafc',
         bgVariant: '#f1f5f9',
         darkLight: '#cbd5e1',
+        closed: '#f87171',
+        open: '#4ade80',
       },
       borderRadius: {
         xs: '0.06125rem',

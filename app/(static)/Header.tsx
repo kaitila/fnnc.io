@@ -28,7 +28,7 @@ export const Header = () => {
 					</div>
 				</div>
 				<div className="
-					w-full h-96
+					w-full h-144
 					md:flex md:justify-between md:w-full md:gap-16 relative
 				">
 					<StockCard ticker="IBM" exchange="NYSE" countryCode="US" status className="mt-4" chartWidth={30} darkMode/>

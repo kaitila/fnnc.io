@@ -18,8 +18,7 @@ export const ReadMore = () => {
                         Look up <span className="text-primary">all</span> stocks traded in <span className="text-primary">any</span> US exchange.
                     </h2>
                     <p className="text-light text-lg">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia sequi magnam non nostrum rerum saepe!</p>
-                </AboutCard>
-                        
+                </AboutCard>            
                 
                 <Scrolling className="h-32"/>
                 <AboutCard appear="right" align="end">

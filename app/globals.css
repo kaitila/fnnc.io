@@ -110,3 +110,26 @@ body {
 	animation-range-start: 100px;
 	animation-range-end: 200px;
 }
+
+/* width */
+::-webkit-scrollbar {
+  width: 0.25rem;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: transparent;
+  margin-block: 0.125rem;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 0.125rem;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #64748b;
+  cursor: pointer;
+}
