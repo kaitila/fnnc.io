@@ -16,6 +16,10 @@ export class KForm {
         this.schema = formSchema;
     }
 
+    public clearErrors() {
+        this.setErrors(this.schema.getDefaultErrors());
+    }
+
     public handleSubmit(e: FormEvent<HTMLFormElement>) {
         const errorKeys = this.getErrorKeys();
 

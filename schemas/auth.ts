@@ -37,5 +37,19 @@ export const signUpSchema = new Schema({
         maxLength: 20,
         message: 'Passwords do not match.',
         match: 'password',
+    },
+    firstName: {
+        type: 'text',
+        required: true,
+        minLength: 1,
+        maxLength: 20,
+        message: 'First name is required',
+    },
+    lastName: {
+        type: 'text',
+        required: true,
+        minLength: 1,
+        maxLength: 20,
+        message: 'Last name is required',
     }
 }, {});

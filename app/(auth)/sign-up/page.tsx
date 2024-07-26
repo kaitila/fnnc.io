@@ -1,3 +1,5 @@
+/* 'use client'; */
+
 import { SignUpForm } from "@/components/auth/SignUpForm";
 import { Logo } from "@/components/Logo";
 import { LogoVisual } from "@/components/LogoVisual";
@@ -5,6 +7,7 @@ import { StockCard } from "@/components/StockCard";
 import Link from "next/link";
 
 const SignUpPage = () => {
+
     return (
         <div className="
             flex max-w-224 min-h-screen justify-center items-center mx-auto p-6 pt-20

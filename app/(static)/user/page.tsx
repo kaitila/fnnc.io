@@ -9,6 +9,9 @@ const UserPage = async () => {
       redirect('/login')
     }
 
+    const user = (await supabase.from('profiles').select('*')).data;
+    console.log(user);
+
     return (
         <main >
             <p className="mt-20">Signed in as: {data.user.email}</p>

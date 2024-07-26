@@ -2,8 +2,10 @@
 import { FormStateType } from "@/kform/kform.types";
 import { signUpSchema } from "@/schemas/auth";
 import { IFormState } from "@/types";
-import { createClient } from "@/utils/supabase/server";
+import { createClient, createServiceClient } from "@/utils/supabase/server";
+import { SignUpWithPasswordCredentials } from "@supabase/supabase-js";
 import { revalidatePath } from "next/cache";
+import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 
 export const signUp = async (
@@ -20,9 +22,16 @@ export const signUp = async (
 
     const supabase = createClient();
 
-    const signUpData = {
+    const signUpData: SignUpWithPasswordCredentials = {
         email: data.email,
         password: data.password,
+        options: {
+            data: {
+                first_name: data.firstName,
+                last_name: data.lastName,
+                email: data.email,
+            }
+        }
     }
 
     const { error } = await supabase.auth.signUp(signUpData);
@@ -42,4 +51,22 @@ export const signUp = async (
 
     revalidatePath('/', 'layout');
     redirect('/user');
+}
+
+export const validateEmail = async (email: string) => {
+    const supabase = createServiceClient();
+    const { count } = await supabase
+        .from('profiles')
+        .select('*', { count: 'exact', head: true })
+        .eq('email', email);
+    
+    if (count) {
+        return {
+            code: 100,
+        }
+    }
+
+    return {
+        
+    }
 }
