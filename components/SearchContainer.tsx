@@ -6,30 +6,37 @@ import '@/app/globals.css';
 export interface SearchContainerProps {
     className?: string | undefined,
     results: ITickersResults[],
+    maxHeight?: number;
+    maxHeightMd?: string;
 }
 
 const Divider = () => {
-    return <div className="w-80 h-0.5 bg-lighter mx-auto my-1.5"></div>;
+    return <div className="w-4/5 h-0.25 bg-lighter mx-auto my-1.5"></div>;
 }
 
 export const SearchContainer = ({
     className,
     results,
+    maxHeight,
+    maxHeightMd = '64',
 }: SearchContainerProps) => {
     return (
         <div className={`
-            bg-bg pb-2 w-fit rounded-lg shadow-md 
+            bg-bg py-2 rounded-lg shadow-md 
             ${ className }
         `}>
-            <div className="
-                max-h-56 overflow-y-scroll
-                md:max-h-64    
-            ">
-                {results.map((el) => {
+            <div className={`
+                overflow-y-scroll
+                `}
+                style={{
+                    maxHeight: `${maxHeight}rem`,
+                }}
+            >
+                {results.map((el, i) => {
                     return (
                         <>
-                            {/* <Divider /> */}
-                            <StockViewMinimal name={el.name} ticker={el.ticker} exchange={el.primary_exchange}/>
+                            { i > 0 ? <Divider /> : null}
+                            <StockViewMinimal name={el.name} key={i} ticker={el.ticker} exchange={el.primary_exchange}/>
                         </>
                     );
                 })} 

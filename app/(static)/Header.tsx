@@ -32,7 +32,8 @@ export const Header = () => {
 					md:flex md:justify-between md:w-full md:gap-16 relative
 				">
 					<StockCard ticker="IBM" exchange="NYSE" countryCode="US" status className="mt-4" chartWidth={30} darkMode/>
-					<SearchBar className="mt-16 mx-auto md:m-0"/>
+
+					<SearchBar className="mt-16 mx-auto md:m-0 max-w-96 min-w-48" sqHeight={16}/>
 					<LogoVisual className="scale-100 absolute opacity-50 -rotate-90 -z-10 -top-12 left-8 
 						md:top-0 md:-left-2 md:scale-125"
 					/>

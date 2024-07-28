@@ -1,23 +1,36 @@
 'use client';
 
-import { ticker } from "@/polygon_api/ticker";
-import { ChangeEvent, useEffect, useRef, useState } from "react";
-import { FaSearch } from "react-icons/fa";
-import { SearchContainer } from "./SearchContainer";
-import { useQuery } from "@tanstack/react-query";
-import { ITickersResults } from "@polygon.io/client-js";
+import { getSearchQuery } from "@/apis/methods/getSearchQuery";
+import { SearchQuery } from "@/apis/methods/types";
+import { SearchContainer } from "@/components/SearchContainer";
+import { useRouter } from "next/navigation";
+import { ChangeEvent, KeyboardEvent, useEffect, useRef, useState } from "react";
+import { FaSearch } from "react-icons/fa"
+
+export interface SearchBarProps {
+    className?: string | undefined,
+    sqHeight: number,
+    hoverStyles?: string,
+    focusStyles?: string,
+}
 
 export const SearchBar = ({
     className,
-}: {
-    className: string | undefined,
-}) => {
-    const [ hover, setHover ] = useState(false);
+    sqHeight,
+    hoverStyles,
+    focusStyles,
+}: SearchBarProps) => {
+
     const [ focus, setFocus ] = useState(false);
+    const [ hover, setHover ] = useState(false);
     const [ visible, setVisible ] = useState(false);
     const [ value, setValue ] = useState("");
 
-    const [ data, setData ] = useState<ITickersResults[]>([]);
+    const [ data, setData ] = useState<SearchQuery>([]);
+
+    const inputRef = useRef<HTMLInputElement>(null);
+
+    const router = useRouter();
 
     const handleOnChange = (event: ChangeEvent<HTMLInputElement>) => {
       setValue(event.target.value);
@@ -29,11 +42,12 @@ export const SearchBar = ({
     }, [value]);
 
     const query = () => {
-        ticker(value).then((data) => {
+        getSearchQuery(value).then((data) => {
             setData(data);
         });
     }
 
+    
     const onBlur = () => {
         setFocus(false);
         setVisible(false);
@@ -52,30 +66,49 @@ export const SearchBar = ({
         setHover(false);
     }
 
+    const onClick = () => {
+        router.push(`/dashboard/search?query=${value}`);
+    }
+
+    const onKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
+        if (e.key === 'Enter') {
+            onClick();
+            inputRef.current?.blur();
+            if (inputRef.current?.value) {
+                inputRef.current.value = '';
+            }
+            setValue('');
+        }
+    }
+    /* w-144 */
     return (
-        <div className={`relative flex flex-col items-center max-w-96 flex-1 min-w-48 h-max ${className}`}>
-            <div className="flex items-center w-full px-2">
-                <input 
-                    type="text" 
-                    className="w-full mb-1 text-2xl focus:outline-none font-medium bg-transparent" 
-                    placeholder="Search"
-                    onFocus={onFocus}
-                    onBlur={onBlur}
-                    onMouseEnter={onHover}
-                    onMouseLeave={onLeave}    
-                    onChange={handleOnChange}
-                    value={value}
-                />
-                <FaSearch className="text-xl transition-all cursor-pointer hover:text-primary"/>
-            </div>
-            <div 
-                className={`
-                    w-full relative h-0.5 rounded-sm bg-light after:transition-all after:duration-300 after:ease-out
-                    after:content-[''] after:w-1/3 after:bg-primary after:h-1 after:-bottom-0.25 after:rounded-sm after:absolute 
-                    ${hover || focus ? 'after:w-2/3' : ''}
-                `}
-            ></div>
-            <SearchContainer className={`absolute top-10 ${visible && data.length > 0 ? 'block' : 'hidden'}`} results={data}/>
+        <div 
+            className={` 
+                relative w-full border shadow-sm border-lighter rounded-2xl py-3 px-6 flex gap-4 items-center h-max
+                after:transition-all after:duration-300 after:ease-out
+                after:content-[''] after:w-1/3 after:bg-primary after:h-1 after:-bottom-0.5 after:rounded-sm after:absolute after:left-1/2 after:-translate-x-1/2
+                ${hover || focus ? 'after:w-2/3' : ''}
+                ${ className }
+        `}>
+            <input 
+                ref={inputRef}
+                type="text"
+                className="
+                    w-full text-lg bg-transparent 
+                    focus:outline-none
+                "
+                placeholder="Search"
+                onMouseEnter={onHover}
+                onMouseLeave={onLeave}
+                onFocus={onFocus}
+                onBlur={onBlur}
+                onChange={handleOnChange}
+                onKeyDown={onKeyDown}
+            />
+            <button onClick={onClick}>
+                <FaSearch className="text-xl text-light transition-all cursor-pointer hover:text-primary"/>
+            </button>
+            <SearchContainer className={`absolute top-16 shadow-sm border border-lighter w-full left-0 ${data.length && visible ? 'block' : 'hidden'}`} maxHeight={sqHeight} maxHeightMd="" results={data}/>
         </div>
     )
 }

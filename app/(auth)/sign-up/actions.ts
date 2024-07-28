@@ -49,8 +49,8 @@ export const signUp = async (
         }
     }
 
-    revalidatePath('/', 'layout');
-    redirect('/user');
+    revalidatePath('/dashboard', 'layout');
+    redirect('/dashboard');
 }
 
 export const validateEmail = async (email: string) => {

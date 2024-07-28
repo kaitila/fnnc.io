@@ -34,6 +34,6 @@ export const signInWithPassword = async (
         }
     }
 
-    revalidatePath('/', 'layout');
-    redirect('/user');
+    revalidatePath('/dashboard', 'layout');
+    redirect('/dashboard');
 }

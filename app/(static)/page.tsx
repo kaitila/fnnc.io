@@ -1,4 +1,3 @@
-import { ticker } from "@/polygon_api/ticker";
 import { Header } from "./Header";
 import { ReadMore } from "./ReadMore";
 

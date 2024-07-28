@@ -19,8 +19,8 @@ export const DashboardNav = ({
                 md:max-w-192 md:rounded-xl md:py-3 md:px-16 md:shadow-sm md:w-full md:mx-auto md:mt-10 md:border md:border-lighter md:h-16
             ">
                 <NavLink href="/dashboard" className="">Home</NavLink>
-                <NavLink href="/dashboard/search" className="">Search</NavLink>
-                <NavLink href="/dashboard/account" className="">Account</NavLink>
+                <NavLink href="/dashboard/explore" className="">Explore</NavLink>
+                <NavLink href="/dashboard/watchlists" className="">Watchlists</NavLink>
 
             </div>
         </nav>
@@ -61,7 +61,7 @@ const NavLink = ({
 
         await sleep(250);
         router.push(href);
-        await sleep(250);
+        await sleep(500);
 
         main?.classList.remove('page-transition');
     }

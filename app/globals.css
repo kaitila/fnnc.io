@@ -136,11 +136,17 @@ body {
 
 .page-transition {
   opacity: 0;
-  transform: translateY(50px);
+  filter: blur(5px);
+  transform: translateY(100px);
 }
 
 main {
-  transition-property: transform, opacity;
-  transition-duration: 250ms;
+  transition-property: transform, opacity, filter;
+  transition-duration: 200ms;
   transition-timing-function: ease-out;
+}
+
+.loading-animation {
+  background: rgb(203,213,225);
+  background: linear-gradient(90deg, rgba(203,213,225,1) 0%, rgba(100,116,139,1) 98%);
 }

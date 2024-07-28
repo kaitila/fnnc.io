@@ -1,4 +1,4 @@
-import { alpha } from "@/alpha_api/Alpha";
+import { alpha } from "@/apis/alpha/Alpha";
 import { timeSeriesDaily } from "./timeSeriesDaily";
 
 export const getHigh = (arr: DailyInterval[]): number => {

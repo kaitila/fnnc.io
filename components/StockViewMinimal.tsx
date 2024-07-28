@@ -15,7 +15,7 @@ export const StockViewMinimal = ({
     ticker,
 }: StockViewMininalProps) => {
     return (
-        <div className={`max-w-96 min-w-72 ${ className }`}>
+        <div className={`min-w-72 ${ className }`}>
             <div className="p-2 flex items-center justify-between gap-8">
                 <div>
                     <h3 className="font-bold text-xl">{name}</h3>

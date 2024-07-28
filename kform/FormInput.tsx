@@ -1,6 +1,6 @@
 'use client';
 
-import { ChangeEvent, HTMLInputTypeAttribute } from "react";
+import { ChangeEvent, HTMLInputTypeAttribute, KeyboardEvent } from "react";
 import { useFormStatus } from "react-dom";
 import { useKFormContext } from "./context/KFormProvider";
 import { useFormField } from "./context/FieldProvider";
@@ -64,6 +64,12 @@ export const FormInput = ({
     const onLeave = () => {
         setHover(false);
     }
+
+    const onKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
+        if (e.key == 'Enter') {
+            e.preventDefault();
+        }
+    }
     
     return (
         <input 
@@ -79,6 +85,7 @@ export const FormInput = ({
             onFocus={onFocus}
             onMouseEnter={onHover}
             onMouseLeave={onLeave}
+            onKeyDown={onKeyDown}
             autoComplete="off"
         />
     );

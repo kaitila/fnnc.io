@@ -1,4 +1,4 @@
-import { globalQuote } from "@/alpha_api/globalQuote";
+import { globalQuote } from "@/apis/alpha/globalQuote";
 import { Chart } from "@/components/Chart"
 import ReactCountryFlag from "react-country-flag";
 import { LuDot } from "react-icons/lu";

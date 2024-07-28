@@ -1,5 +1,5 @@
-import { timeSeriesDaily } from "@/alpha_api/timeSeriesDaily";
-import { getHigh, getLow } from "@/alpha_api/utils";
+import { timeSeriesDaily } from "@/apis/alpha/timeSeriesDaily";
+import { getHigh, getLow } from "@/apis/alpha/utils";
 import { Candle } from "@/components/Candle"
 
 interface ChartProps {

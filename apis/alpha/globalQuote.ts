@@ -1,5 +1,5 @@
-import { alpha } from "@/alpha_api/Alpha";
-import { apiCall } from "@/alpha_api/apiCall";
+import { alpha } from "@/apis/alpha/Alpha";
+import { apiCall } from "@/apis/alpha/apiCall";
 
 interface GlobalQuoteProps extends ApiProps {
     dataType?: 'json' | 'csv',

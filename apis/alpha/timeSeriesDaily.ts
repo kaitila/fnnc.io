@@ -1,5 +1,5 @@
-import { apiCall } from "@/alpha_api/apiCall";
-import { alpha } from "@/alpha_api/Alpha";
+import { apiCall } from "@/apis/alpha/apiCall";
+import { alpha } from "@/apis/alpha/Alpha";
 
 interface TimeSeriesDailyProps extends ApiProps {
     intervalCount?: number,
