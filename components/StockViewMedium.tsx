@@ -2,7 +2,7 @@
 
 import { LuDot } from "react-icons/lu";
 import { IoIosArrowForward } from "react-icons/io";
-import { IoMdArrowDropup } from "react-icons/io";
+import { IoMdArrowDropup, IoMdArrowDropdown } from "react-icons/io";
 import { getPriceQuote } from "@/apis/methods/getPriceQuote";
 import { useEffect, useState } from "react";
 
@@ -28,10 +28,13 @@ export const StockViewMedium = ({
         getPriceQuote(ticker)
             .then(({ price, changeP }) => setData({price: price, changeP: changeP}))
             .then(() => setPending(false));
-    }, [])
+    }, []);
+
+    const positive = data.changeP > 0;
 
     const price = data.price.toFixed(2);
-    const changeP = data.changeP.toFixed(2);
+    const changeP = Math.abs(data.changeP).toFixed(2);
+
 
     return (
         <div className={`shadow-sm border-primary border rounded-xl col-span-1 ${ className }`}>
@@ -56,7 +59,7 @@ export const StockViewMedium = ({
                     (
                         <>
                             <h2 className="text-3xl font-semibold">{price.slice(0, -3)}<span className="text-light text-lg">{price.slice(-3)}</span></h2>
-                            <h3 className="text-lg font-semibold text-green-500 text-nowrap"><IoMdArrowDropup className="inline"/>{changeP}%</h3>
+                            <h3 className={`text-lg font-semibold ${positive ? 'text-green-500' : 'text-red-500'} text-nowrap`}>{positive ? <IoMdArrowDropup className="inline"/> : <IoMdArrowDropdown className="inline"/>}{changeP}%</h3>
                         </>
                     )}
                 </div>
