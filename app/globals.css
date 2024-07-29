@@ -148,5 +148,5 @@ main {
 
 .loading-animation {
   background: rgb(203,213,225);
-  background: linear-gradient(90deg, rgba(203,213,225,1) 0%, rgba(100,116,139,1) 98%);
+  background: linear-gradient(90deg, rgba(203,213,225,1) 0%, rgba(100,116,139,.40) 98%);
 }
