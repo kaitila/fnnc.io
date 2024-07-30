@@ -1,8 +1,11 @@
 import { getPriceQuote } from "@/apis/methods/getPriceQuote";
 import { getProfile } from "@/apis/methods/getProfile";
 import { CompanyError } from "@/components/CompanyError";
-import { PriceView } from "@/components/Price";
+import { PriceLoading, PriceView } from "@/components/stocks/Price";
 import { LuDot } from "react-icons/lu";
+import { createClient } from "@/utils/supabase/server";
+
+import "@/app/globals.css";
 
 export interface HeaderProps {
 	className?: string | undefined;
@@ -14,9 +17,16 @@ export const Header = async ({ className, ticker }: HeaderProps) => {
 
 	if (error || !data) {
 		console.log(error);
-		return <CompanyError className="mx-auto w-fit" />;
+		return (
+			<CompanyError
+				message="ticker not found!"
+				className="mx-auto w-fit"
+			/>
+		);
 	}
 
+	const supabase = createClient();
+	await supabase.from("searches").insert({ ticker: ticker });
 	const priceData = await getPriceQuote(ticker);
 
 	return (
@@ -77,6 +87,33 @@ export const Header = async ({ className, ticker }: HeaderProps) => {
 					<p className="text-base font-semibold text-red-500">
 						closed
 					</p>
+				</div>
+			</div>
+		</header>
+	);
+};
+
+export const HeaderLoading = () => {
+	return (
+		<header>
+			<div className="p-6 border border-lighter rounded-xl shadow-sm w-full">
+				<div
+					className="
+							mx-auto flex items-center
+							md:gap-8
+						"
+				>
+					<div className="relative w-16 h-16 rounded-lg bg-lighter"></div>
+					<div className="flex-1">
+						<div className="w-64 h-9 loading-animation rounded-lg mb-1"></div>
+						<div className="loading-animation rounded-lg w-20 h-8"></div>
+					</div>
+					<PriceLoading size="lg" />
+				</div>
+				<div className="flex mt-4 items-center gap-1">
+					<div className="w-64 h-7 loading-animation rounded-lg"></div>
+					<LuDot className="text-xl text-light" />
+					<div className="loading-animation rounded-lg w-16 h-6"></div>
 				</div>
 			</div>
 		</header>
